@@ -45,8 +45,8 @@ const long interval = 60000;               //Sampling interval time mSec
 
 const long COM_BAUD = 115200;                       //ESP UART baudrate
 const String mode = "3";                           //1 - Client, 2 - Access Point, 3 - Both                             
-const String ssid = "Sfera";       //Network SSID
-const String password = "sferacom";              //Network Password
+const String ssid = "SSID";       //Network SSID
+const String password = "pasword";              //Network Password
 //const String apipaddress = "192.168.4.1";          //Desired IP address
 //const String cipaddress = "192.168.0.201";          //Desired IP address
 //const String subnetworkmask = "255.255.255.0";  
