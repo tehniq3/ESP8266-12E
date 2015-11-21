@@ -48,8 +48,8 @@ const long interval = 60000;               //Sampling interval time mSec
 
 const long COM_BAUD = 115200;                       //ESP UART baudrate
 const String mode = "1";                           //1 - Client, 2 - Access Point, 3 - Both                             
-const String ssid = "bbk";       //Network SSID
-const String password = "internet";              //Network Password
+const String ssid = "SSID";       //Network SSID
+const String password = "pasword";              //Network Password
 
 //SoftwareSerial esp8266(RX, TX); // RX, TX   
 
