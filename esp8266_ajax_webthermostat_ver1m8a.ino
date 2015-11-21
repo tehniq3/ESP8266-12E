@@ -158,9 +158,23 @@ Serial.println(millis());
             requestPaths[connection->getId()] = (String)((char*)buffer + 4);   }      
             if (completed)   {     String path = requestPaths[connection->getId()];
        //if (path == "/")
+       // Thermostat temperature path
+       if (path.startsWith("/change_thermostat_temperature"))
+       {
+          Serial.println("AJAX request received: change thermostat temperature");
+          // Set the new temperature
+          if (path.contains("&done"))
+          {
+             index1 = readString.indexOf('new_temp=');
+             index2 = readString.indexOf('&done');
+             new_value = readString.substring(index1+9, index2);
+             Serial.println("New value from the form: ");
+             Serial.println(new_value);
+          }
+       }
        if (path.startsWith("/ajax_switch&nocache="))      
               {
-              Serial.println("AJAX request received"); 
+              Serial.println("AJAX request received: ajax switch"); 
     
          /*       if (digitalRead(7)) {
                 connection->send(F("<p>Switch 7 state: ON</p>"));
@@ -287,6 +301,17 @@ if ((te >= teset - dete/2) and (te <= teset + dete/2))
                 "request.send(null);\r\n"
                 "setTimeout('GetSwitchAnalogData()', 30000);\r\n"
                 "}\r\n"
+                "function set_thermostat_temperature() {\r\n"
+                "var nocache = \"?nocache=\" + Math.random() * 1000000;\r\n"
+                "var request = new XMLHttpRequest();\r\n"
+                "var new_temperature = document.getElementById(\"js-temperature-value\");\r\n"
+                "request.onreadystatechange = function() {\r\n"
+                "if (this.readyState == 4) {\r\n"
+                "if (this.status == 200) {\r\n"
+                "}}}\r\n"
+                "request.open(\"GET\", \"change_thermostat_temperature\" + nocache + \"&new_temp=\" + new_temperature + \"&done\", true);\r\n"
+                "request.send(null);\r\n"
+                "}\r\n"
                 "</script>\r\n"                       
                 "</head>\r\n"           
                 "<body onload=\"GetSwitchAnalogData()\">\r\n"  
@@ -297,6 +322,19 @@ if ((te >= teset - dete/2) and (te <= teset + dete/2))
           //      "<font color=yellow>"
                 "<div id=\"sw_an_data\">\r\n"
                 "</div>\r\n"  
+                   "<fieldset>"
+                   "<legend>You will set temperature at</legend>"
+                   "<select name=\"temperature\" id=\"js-temperature-value\">"
+                     "<option value='10'>10</option>"
+                     "<option value='14'>14</option>"
+                     "<option value='18'>18</option>"
+                     "<option value='20'>20</option>"
+                     "<option value='25'>25</option>"
+                   "</select>"
+                   // "<input type=\"radio\" name=\"RedLEDState\" value=\"RED_OFF\" checked=\"checked\"> OFF<br>"
+                   "</fieldset>"                         
+                   "<input type=\"button\" onclick=\"set_thermostat_temperature();return false;\" value=\"Submit\">"
+                
                 "<H4>Sketch by Nicu Florica aka niq_ro.<p />"
                 "<a href=http://arduinotehniq.blogspot.com target=blank>http://arduinotehniq.blogspot.com</a>"  
     //            "<button type=\"button\" onclick=\"http://arduinotehniq.blogspot.com\">http://arduinotehniq.blogspot.com</button>"
