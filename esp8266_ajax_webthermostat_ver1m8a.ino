@@ -85,8 +85,8 @@ pinMode(releu, OUTPUT);
   sendData("AT+CIPMUX=1\r\n",1000,DEBUG); // configure for multiple connections
   //sendData("AT+CIPSERVER=1,80\r\n",1000,DEBUG); // turn on server on port 80 
   
-  // Start server on port 8084
-  server.start(8084);
+  // Start server on port 80
+  server.start(80);
   Serial.println();
   Serial.println("=================================");
   if(mode=="1"){
