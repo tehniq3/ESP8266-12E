@@ -293,7 +293,7 @@ if ((te >= teset - dete/2) and (te <= teset + dete/2))
          //       "<body style=background:#A0B0B0>"   
                 "<body style=background:lightblue>"   
                 "<center><h1>AJAX Thermostat</br>with Arduino &</br>ESP8266-12E shield</h1>\r\n" 
-                "<h4>(DS18B20 as sensor for temperature & humidity)</h4>"
+                "<h4>(DHT22 as sensor for temperature & humidity)</h4>"
           //      "<font color=yellow>"
                 "<div id=\"sw_an_data\">\r\n"
                 "</div>\r\n"  
