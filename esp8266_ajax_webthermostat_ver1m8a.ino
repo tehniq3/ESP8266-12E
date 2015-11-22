@@ -293,7 +293,7 @@ Serial.println(millis());
 				"function set_thermostat_temperature() {\r\n"
 				"var nocache = \"?nocache=\" + Math.random() * 1000000;\r\n"
 				"var request = new XMLHttpRequest();\r\n"
-				"var new_temperature = document.getElementById(\"js-temperature-value\");\r\n"
+				"var new_temperature = document.getElementById(\"js-temperature-value\").value;\r\n"
 				"request.onreadystatechange = function() {\r\n"
 				"if (this.readyState == 4) {\r\n"
 				"if (this.status == 200) {\r\n"
