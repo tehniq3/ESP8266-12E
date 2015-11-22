@@ -259,7 +259,7 @@ Serial.println(millis());
 					connection->send(String(taim4));
 					connection->send(F(" hours.."));            
 				}            
-				else if (path == "/"){
+				else {
 				connection->send(F(
 				"HTTP/1.1 200 OK\r\n\r\n"
 				"<!DOCTYPE html>\r\n"
