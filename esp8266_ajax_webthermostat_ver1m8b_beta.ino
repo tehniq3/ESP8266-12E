@@ -3,7 +3,7 @@
 // http://nicuflorica.blogspot.ro/
 // http://arduinotehniq.blogspot.com/
 // http://www.arduinotehniq.com/ - new site
-// version 1m8b_shield by niq_ro with DS18B20 & DHT11
+// version 1m8b_shield by niq_ro with DHT22
 
 //#include <SoftwareSerial.h> 
 #include <ESP8266pro.h> 
