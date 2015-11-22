@@ -162,7 +162,7 @@ Serial.println(millis());
 				String path = requestPaths[connection->getId()];
 				//if (path == "/")
 				// Thermostat temperature path
-				if (path.startsWith("/change_thermostat_temperature"))
+				if (path.indexOf("change_thermostat_temperature") > 0)
 				{
 					Serial.println("AJAX request received: change thermostat temperature");
 					// Set the new temperature
@@ -178,7 +178,7 @@ Serial.println(millis());
 						Serial.println(new_value);
 					}
 				}
-				else if (path.startsWith("/ajax_switch&nocache="))      
+				else if (path.indexOf("ajax_switch&nocache=") > 0)      
 				{
 					Serial.println("AJAX request received: ajax switch"); 
 					int h = dht.readHumidity();
