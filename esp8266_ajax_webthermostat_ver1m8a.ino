@@ -166,11 +166,14 @@ Serial.println(millis());
 				{
 					Serial.println("AJAX request received: change thermostat temperature");
 					// Set the new temperature
-					if (path.contains("&done"))
+					if (path.indexOf("&done") > 0)
 					{
-						index1 = readString.indexOf('new_temp=');
-						index2 = readString.indexOf('&done');
-						new_value = readString.substring(index1+9, index2);
+						int index1;
+						int index2;
+						String new_value;
+						index1 = path.indexOf('new_temp=');
+						index2 = path.indexOf('&done');
+						new_value = path.substring(index1+9, index2);
 						Serial.println("New value from the form: ");
 						Serial.println(new_value);
 					}
