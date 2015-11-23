@@ -205,13 +205,15 @@ Serial.println(millis());
         //    EEPROM.write(600,teset);
             teset01 = test01.toInt();
             teset02 = test02.toInt();
+          if ((teset01 >= 21) and (teset01 <= 25))
+         {
             teset = 10*teset01 + teset02;
             teset = teset/10;
             EEPROM.write(601,teset01);
             EEPROM.write(602,teset02);
             Serial.print(" / ");
             Serial.println(teset);
-            
+         }  
             /*
             index1 = path.indexOf('new_temp=');
             tz = index1;
