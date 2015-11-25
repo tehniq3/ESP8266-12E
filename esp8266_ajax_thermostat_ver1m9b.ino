@@ -272,7 +272,9 @@ Serial.println(millis());
             teset2 = -teset;
             connection->send(F("-"));
           }
+          connection->send(F("<span id='js-set-temp'>"));
           connection->send(String(teset2,1));
+          connection->send(F("</span>"));
           connection->send(F("<sup>o</sup>C"));
           //    connection->send(String(tz));
 
@@ -328,6 +330,7 @@ Serial.println(millis());
         "background-color: #68a2d1;padding:8px;text-align:center;}"
         "a:link {color: white;} a:visited {color: blue;} a:hover {color: yellow;}"
         "a:active {color: red;} </style>"
+        "<script src='https://code.jquery.com/jquery-1.11.3.min.js'></script>"
         "<script>\r\n"
         "function GetSwitchAnalogData() {\r\n"
         "nocache = \"&nocache=\" + Math.random() * 1000000;\r\n"
@@ -343,17 +346,13 @@ Serial.println(millis());
         "setTimeout('GetSwitchAnalogData()', 13000);\r\n"
         "}\r\n"
         "function set_thermostat_temperature() {\r\n"
+        "$('#js-submit-button').attr('disabled', true);\r\n"
         "var nocache = \"?nocache=\" + Math.random() * 1000000;\r\n"
-        "var request = new XMLHttpRequest();\r\n"
-        //"var new_temperature = document.getElementById(\"js-temperature-value\");\r\n"
         "var new_temperature = document.getElementById(\"js-temperature-value\").value;\r\n"
-        "request.onreadystatechange = function() {\r\n"
-        "if (this.readyState == 4) {\r\n"
-        "if (this.status == 200) {\r\n"
-        "}}}\r\n"
-     //   "request.open(\"GET\", \"change\" + nocache + \"&new_temp=\" + new_temperature + \"&done\", true);\r\n"
-        "request.open(\"GET\", \"change?new_temp=\" + new_temperature, true);\r\n"
-        "request.send(null);\r\n"
+        "$.get('\change?new_temp=' + new_temperature, function (data) {\r\n"
+        "$('#js-set-temp').text(new_temperature + "");\r\n"
+        "$('#js-submit-button').attr('disabled', false);\r\n"
+        "});\r\n"
         "}\r\n"
         "</script>\r\n"                       
         "</head>\r\n"));   
@@ -378,7 +377,7 @@ Serial.println(millis());
         "<option value='25.0'>25.0</option>"
         "</select>"
         "</fieldset>"                         
-        "<input type=\"button\" onclick=\"set_thermostat_temperature();\" value=\"Submit\">"
+        "<input type=\"button\" onclick=\"set_thermostat_temperature();\" id=\"js-submit-button\" value=\"Submit\">"
         "<H4>Sketch by Nicu Florica aka niq_ro.<p />"
         "<a href=http://arduinotehniq.blogspot.com target=blank>http://arduinotehniq.blogspot.com</a>"  
         "<p><br>version. 1.9a - 23.11.2015, Craiova</br>"
